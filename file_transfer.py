@@ -13,7 +13,6 @@ def com_check():
         port_selection = input("Enter COM port number for data transfer : ")
         try:
             port_number = int(port_selection)
-            #print(port_number)
         except:
             print("Please enter only the number of the COM port to use, try again.")
             continue
@@ -25,10 +24,9 @@ def com_check():
             good_port = True
             return port_selection
         
-ser = serial.Serial(com_check(), 9600, timeout=0.050)
+ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
 
 ############### FILE SELECTION ###############
-#file generation 
 def file_selection(): 
     file_confirmed = False 
     while not(file_confirmed):
@@ -38,7 +36,6 @@ def file_selection():
         print("Local files are: ")
         for x in range(len(files_at_path)):
             print(files_at_path[x])
-        #filename = 'msconfig.cfg'
         user_input = input("Enter filename that you would like to transfer OR (n)o to change directories: ")
         if user_input.lower() == 'no' or user_input.lower() == 'n':
             print("user requested changing directories")
