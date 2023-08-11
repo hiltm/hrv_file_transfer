@@ -78,14 +78,15 @@ def transfer():
     #print(len(data))
     for x in range(len(data)):
         set_data_out(data[x])
-        
+
 ############### RECEIVE ###############
 
 def receive():
     #while ser.in_waiting:
     end_of_file = ("#END\r")                #end of file as dictated by PIC code, this is added by default to files generated through SID-Automation-GUI
-    data_in = ser.read_until(end_of_file)
-    print(data_in)
+    data = ser.read_until(end_of_file)
+    set_data_in(data)
+    
 
 ############### MAIN ###############
 ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
