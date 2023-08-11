@@ -1,8 +1,9 @@
+import os
 import time
 import serial
 import serial.tools.list_ports
 
-
+############### SETUP COM PORT ###############
 def com_check():
     good_port = False
     ports = serial.tools.list_ports.comports()
@@ -25,9 +26,44 @@ def com_check():
             return port_selection
         
 ser = serial.Serial(com_check(), 9600, timeout=0.050)
-count = 0
 
-while 1:
-    ser.write('Sent %d time(s)')
-    time.sleep(1)
-    count += 1
+############### FILE SELECTION ###############
+#file generation 
+def file_selection(): 
+    file_confirmed = False 
+    while not(file_confirmed):
+        print("Current filepath is "+os.path.abspath(__file__))
+        os.chdir(os.path.dirname(os.path.abspath(__file__)))
+        files_at_path = os.listdir(os.curdir)
+        print("Local files are: ")
+        for x in range(len(files_at_path)):
+            print(files_at_path[x])
+        #filename = 'msconfig.cfg'
+        user_input = input("Enter filename that you would like to transfer OR (n)o to change directories: ")
+        if user_input.lower() == 'no' or user_input.lower() == 'n':
+            print("user requested changing directories")
+            # change directory TODO
+            continue
+        elif user_input not in files_at_path:
+            print("File does not exist as typed, try again.")
+            continue
+        else:
+            file_to_transfer = user_input
+            file_confirmed = True
+            return file_to_transfer
+        
+
+
+############### TRANSFER ###############
+#count = 0
+
+#while 1:
+#    ser.write('Sent %d time(s)')
+#    time.sleep(1)
+#    count += 1
+
+file_to_transfer = file_selection()
+f = open(file_to_transfer, "r")
+print(f.read()) 
+
+############### RECEIVE ###############
