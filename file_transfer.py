@@ -3,6 +3,21 @@ import time
 import serial
 import serial.tools.list_ports
 
+data_in = []
+data_out = []
+
+def set_data_in(x):
+    data_in.append(x)
+
+def get_data_in():
+    return data_in
+
+def set_data_out(x):
+    data_out.append(x)
+
+def get_data_out():
+    return data_out
+
 ############### SETUP COM PORT ###############
 def com_check():
     good_port = False
