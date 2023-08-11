@@ -23,8 +23,6 @@ def com_check():
         else:
             good_port = True
             return port_selection
-        
-ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
 
 ############### FILE SELECTION ###############
 def file_selection(): 
@@ -63,4 +61,8 @@ file_to_transfer = file_selection()
 f = open(file_to_transfer, "r")
 print(f.read()) 
 
-############### RECEIVE ###############
+############### MAIN ###############
+ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
+transfer()
+time.sleep(1)
+receive()
