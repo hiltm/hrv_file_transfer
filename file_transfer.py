@@ -87,6 +87,12 @@ def receive():
     data = ser.read_until(end_of_file)
     set_data_in(data)
     
+def receive_all():
+    data = ser.read_all()
+    print(data)
+    set_data_in(data)
+    print(data)
+
 def transmit():
     data = str.encode('TEST\r\n')
     ser.write(data)
@@ -97,6 +103,10 @@ def transmit():
 
 ############### MAIN ###############
 ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
-transfer()
-time.sleep(1)
-receive()
+time.sleep(0.5)
+receive_all()
+
+#time.sleep(1)
+#transfer()
+#time.sleep(1)
+#receive()
