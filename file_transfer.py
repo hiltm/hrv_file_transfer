@@ -92,7 +92,6 @@ def receive_all():
     data = ser.read_all()
     print(data)
     set_data_in(data)
-    print(data)
 
 def transmit():
     data = str.encode('TEST\r\n')
