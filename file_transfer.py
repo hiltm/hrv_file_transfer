@@ -74,11 +74,17 @@ def file_selection():
 #    count += 1
 def transfer():
     #file_to_transfer = file_selection()
-    f = open(file_to_transfer, "r")
+    filepath = get_file_to_transfer()
+    f = open(filepath, "r")
     data = f.read()
-    #print(len(data))
-    for x in range(len(data)):
-        set_data_out(data[x])
+    set_data_out(data)
+    num_lines = len(data)
+    print("num_lines is "+str(num_lines))
+    for x,line in enumerate (data):
+        #if ("\r") in data[x]:
+        data_to_write = data[x]
+        ser.write(data_to_write.encode())
+        time.sleep(0.1)
 
 ############### RECEIVE ###############
 
