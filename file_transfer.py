@@ -19,6 +19,14 @@ def set_data_out(x):
 def get_data_out():
     return data_out
 
+def set_file_to_transfer(x):
+    global file_to_transfer
+    file_to_transfer = (os.path.dirname(os.path.abspath(__file__))+"\\"+x)
+
+def get_file_to_transfer():
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    return file_to_transfer
+
 ############### SETUP COM PORT ###############
 def com_check():
     good_port = False
@@ -61,7 +69,8 @@ def file_selection():
         else:
             file_to_transfer = user_input
             file_confirmed = True
-            return file_to_transfer
+            set_file_to_transfer(file_to_transfer)
+            #return file_to_transfer
         
 
 
