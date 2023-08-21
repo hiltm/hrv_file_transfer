@@ -93,8 +93,8 @@ def receive_all():
     print(data)
     set_data_in(data)
 
-def transmit():
-    data = str.encode('TEST\r\n')
+def transmit(cmd_to_transmit):
+    data = str.encode(cmd_to_transmit)
     ser.write(data)
     #ser.write(data_out)
     #for x in range(len(data)):
@@ -104,6 +104,8 @@ def transmit():
 ############### MAIN ###############
 ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
 time.sleep(0.5)
+transmit('RCFG\r\n')
+transmit('*\r\n')
 receive_all()
 
 #time.sleep(1)
