@@ -5,6 +5,7 @@ import serial.tools.list_ports
 
 data_in = []
 data_out = []
+file_to_transfer = ''
 
 def set_data_in(x):
     data_in.append(x)
@@ -72,7 +73,7 @@ def file_selection():
 #    time.sleep(1)
 #    count += 1
 def transfer():
-    file_to_transfer = file_selection()
+    #file_to_transfer = file_selection()
     f = open(file_to_transfer, "r")
     data = f.read()
     #print(len(data))
