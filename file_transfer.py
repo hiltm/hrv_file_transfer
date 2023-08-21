@@ -103,7 +103,7 @@ def transmit(cmd_to_transmit):
 
 ############### MAIN ###############
 ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
-time.sleep(0.5)
+file_to_transfer = file_selection()
 transmit('RCFG\r\n')
 transmit('*\r\n')
 receive_all()
