@@ -75,24 +75,15 @@ def file_selection():
 
 
 ############### TRANSFER ###############
-#count = 0
-
-#while 1:
-#    ser.write('Sent %d time(s)')
-#    time.sleep(1)
-#    count += 1
 def transfer():
-    #file_to_transfer = file_selection()
     filepath = get_file_to_transfer()
     f = open(filepath, "r")
-    data = f.read()
-    set_data_out(data)
-    num_lines = len(data)
-    print("num_lines is "+str(num_lines))
-    for x,line in enumerate (data):
-        #if ("\r") in data[x]:
-        data_to_write = data[x]
-        ser.write(data_to_write.encode())
+    lines = f.readlines()
+    count = 0
+    for line in lines:
+        count += 1
+        print("Line{}: {}".format(count, line))
+        ser.write(line.encode())
         time.sleep(0.1)
 
 ############### RECEIVE ###############
