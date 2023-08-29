@@ -109,9 +109,11 @@ def transmit(cmd_to_transmit):
 
 ############### MAIN ###############
 ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
+wait_time = 1 # in seconds, i found that anything too fast didn't give the PIC enough time to respond to commands, this may matter more for RCFG
+
 file_selection()
 transmit('QUIT\r\n') # get out of file operations menu if there
-time.sleep(0.2)
+time.sleep(wait_time)
 receive_all()
 #transmit('RCFG\r\n')
 #time.sleep(0.2)
@@ -120,12 +122,12 @@ receive_all()
 #time.sleep(0.2)
 #receive_all()
 transmit('FILE\r\n')
-time.sleep(1)
+time.sleep(wait_time)
 receive_all()
 transmit('COPY CON msoperat.cfg\r\n')   # open file msoperat.cfg to write
-time.sleep(1)
+time.sleep(wait_time)
 receive_all()
 transfer()      # transfer data to write
-time.sleep(1)
+time.sleep(wait_time)
 receive_all()
 transmit('\032\r\n')    # ascii control z to exit COPY CON
