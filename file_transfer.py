@@ -122,10 +122,10 @@ receive_all()
 transmit('FILE\r\n')
 time.sleep(1)
 receive_all()
-transmit('COPY CON msoperat.cfg\r\n')
+transmit('COPY CON msoperat.cfg\r\n')   # open file msoperat.cfg to write
 time.sleep(1)
 receive_all()
-transfer()
+transfer()      # transfer data to write
 time.sleep(1)
 receive_all()
-transmit('\032\r\n')
+transmit('\032\r\n')    # ascii control z to exit COPY CON
