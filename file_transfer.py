@@ -5,7 +5,6 @@ import serial.tools.list_ports
 import hashlib
 
 #### TODO ####
-# check file write to ensure same file
 # load multiple files and concatenate to write all to msoperat.cfg
 
 data_in = []
@@ -173,6 +172,12 @@ time.sleep(wait_time)
 #time.sleep(0.2)
 #receive_all()
 transmit('FILE\r\n')
+time.sleep(wait_time)
+#receive_all()
+transmit('COPY MSOPERAT.cfg FILEBACK.cfg\r\n') #back up existing msoperat.cfg on sd card, can't be longer than 12 characters currently
+time.sleep(wait_time)
+#receive_all()
+transmit('DEL msoperat.cfg\r\n') #delete existing msoperat.cfg on sd card
 time.sleep(wait_time)
 #receive_all()
 #transmit('COPY CON ' + 'file_name' + '\r\n')   # open file msoperat.cfg to write
