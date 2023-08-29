@@ -149,6 +149,12 @@ def transmit(cmd_to_transmit):
     #    print(data(x))
     #    set_data_out(data[x])
 
+def checksum_compare():
+    data_in_hash = get_checksum(get_data_in(),"md5")
+    data_out_hash = get_checksum(get_data_out(),"md5")
+    print(data_in_hash)
+    print(data_out_hash)
+
 ############### MAIN ###############
 ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
 wait_time = 1 # in seconds, i found that anything too fast didn't give the PIC enough time to respond to commands, this may matter more for RCFG
@@ -180,8 +186,4 @@ receive_all()
 transmit('TYPE msoperat.cfg\r\n')    # read data written to file on SD card
 time.sleep(wait_time)
 receive_all()
-data_rcvd = get_data_in()
-data_in_hash = get_checksum(data_rcvd,"md5")
-data_out_hash = get_checksum(get_data_out(),"md5")
-print(data_in_hash)
-print(data_out_hash)
+checksum_compare()
