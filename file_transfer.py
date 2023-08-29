@@ -5,7 +5,6 @@ import serial.tools.list_ports
 import hashlib
 
 #### TODO ####
-# fix carriage return in PIC code
 # check file write to ensure same file
 # load multiple files and concatenate to write all to msoperat.cfg
 
@@ -118,7 +117,7 @@ def file_selection():
 ############### TRANSFER ###############
 def transfer():
     filepath = get_file_to_transfer()
-    f = open(filepath, "r")
+    f = open(filepath, "r", newline='')
     lines = f.readlines()
     count = 0
     for line in lines:
