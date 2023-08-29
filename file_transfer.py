@@ -41,19 +41,11 @@ def hashFor(data):
     return hashId.hexdigest()
 
 def get_checksum(bytes, hash_function):
-    """Generate checksum for file baed on hash function (MD5 or SHA256).
- 
-    Args:
-        filename (str): Path to file that will have the checksum generated.
-        hash_function (str):  Hash function name - supports MD5 or SHA256
- 
-    Returns:
-        str`: Checksum based on Hash function of choice.
- 
-    Raises:
-        Exception: Invalid hash function is entered.
- 
-    """
+    #generate checksum for file baed on hash function (MD5 or SHA256)
+    #bytes (list): Path to file that will have the checksum generated
+    #hash_function (str):  Hash function name - supports MD5 or SHA256
+    #Returns: str: Checksum based on Hash function of choice
+
     bytes = hashFor(bytes)
     
     hash_function = hash_function.lower()
