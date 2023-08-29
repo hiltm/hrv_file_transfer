@@ -129,6 +129,14 @@ def transfer():
         set_data_out(line)
         time.sleep(0.1)
 
+def transmit(cmd_to_transmit):
+    data = str.encode(cmd_to_transmit)
+    ser.write(data)
+    #ser.write(data_out)
+    #for x in range(len(data)):
+    #    print(data(x))
+    #    set_data_out(data[x])
+
 ############### RECEIVE ###############
 
 def receive():
@@ -142,13 +150,7 @@ def receive_all():
     print(data)
     set_data_in(data)
 
-def transmit(cmd_to_transmit):
-    data = str.encode(cmd_to_transmit)
-    ser.write(data)
-    #ser.write(data_out)
-    #for x in range(len(data)):
-    #    print(data(x))
-    #    set_data_out(data[x])
+############### CHECKSUM ###############
 
 def checksum_compare():
     data_in_hash = get_checksum(get_data_in(),"md5")
