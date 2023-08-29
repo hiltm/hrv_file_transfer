@@ -2,6 +2,12 @@ import os
 import time
 import serial
 import serial.tools.list_ports
+import hashlib
+
+#### TODO ####
+# fix carriage return in PIC code
+# check file write to ensure same file
+# load multiple files and concatenate to write all to msoperat.cfg
 
 data_in = []
 data_out = []
@@ -26,6 +32,32 @@ def set_file_to_transfer(x):
 def get_file_to_transfer():
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     return file_to_transfer
+
+############### DATA VERIFICATION ###############
+def get_checksum(bytes, hash_function):
+    """Generate checksum for file baed on hash function (MD5 or SHA256).
+ 
+    Args:
+        filename (str): Path to file that will have the checksum generated.
+        hash_function (str):  Hash function name - supports MD5 or SHA256
+ 
+    Returns:
+        str`: Checksum based on Hash function of choice.
+ 
+    Raises:
+        Exception: Invalid hash function is entered.
+ 
+    """
+    
+    hash_function = hash_function.lower()
+    if hash_function == "md5":
+        readable_hash = hashlib.md5(bytes.to_bytes(2, 'big')).hexdigest()
+    elif hash_function == "sha256":
+        readable_hash = hashlib.sha256(bytes.to_bytes(2, 'big')).hexdigest()
+    else:
+        raise("{} is an invalid hash function. Please Enter MD5 or SHA256")
+ 
+    return readable_hash
 
 ############### SETUP COM PORT ###############
 def com_check():
@@ -134,3 +166,13 @@ transfer()      # transfer data to write
 time.sleep(wait_time)
 receive_all()
 transmit('\032\r\n')    # ascii control z to exit COPY CON
+time.sleep(wait_time)
+receive_all()
+transmit('TYPE msoperat.cfg\r\n')    # read data written to file on SD card
+time.sleep(wait_time)
+receive_all()
+data_rcvd = get_data_in()
+data_in_hash = get_checksum(data_rcvd,"md5")
+data_out_hash = get_checksum(get_data_out(),"md5")
+print(data_in_hash)
+print(data_out_hash)
