@@ -126,6 +126,7 @@ def transfer():
         print("Line {}: {}".format(count, line))
         #ser.write('\010'.encode())    # ascii carriage return
         ser.write(line.encode())
+        set_data_out(line)
         time.sleep(0.1)
 
 ############### RECEIVE ###############
@@ -152,8 +153,8 @@ def transmit(cmd_to_transmit):
 def checksum_compare():
     data_in_hash = get_checksum(get_data_in(),"md5")
     data_out_hash = get_checksum(get_data_out(),"md5")
-    print(data_in_hash)
-    print(data_out_hash)
+    print("data in hash is " +data_in_hash)
+    print("data out hash is " +data_out_hash)
 
 ############### MAIN ###############
 ser = serial.Serial(com_check(), 9600, timeout=0.050)       # hard-coding to 9600 baud since that's what MS-SID uses, expand this later if used for other projects
@@ -163,7 +164,7 @@ file_name = 'msoperat.cfg' #currently MS-SID code only expects this filename but
 file_selection()
 transmit('QUIT\r\n') # get out of file operations menu if there
 time.sleep(wait_time)
-receive_all()
+#receive_all()
 #transmit('RCFG\r\n')
 #time.sleep(0.2)
 #receive_all()
@@ -172,18 +173,18 @@ receive_all()
 #receive_all()
 transmit('FILE\r\n')
 time.sleep(wait_time)
-receive_all()
+#receive_all()
 #transmit('COPY CON ' + 'file_name' + '\r\n')   # open file msoperat.cfg to write
 transmit('COPY CON msoperat.cfg\r\n')   # open file msoperat.cfg to write
 time.sleep(wait_time)
-receive_all()
+#receive_all()
 transfer()      # transfer data to write
 time.sleep(wait_time)
-receive_all()
+#receive_all()
 transmit('\032\r\n')    # ascii control z to exit COPY CON
 time.sleep(wait_time)
-receive_all()
+#receive_all()
 transmit('TYPE msoperat.cfg\r\n')    # read data written to file on SD card
-time.sleep(wait_time)
-receive_all()
+#time.sleep(wait_time)
+receive()
 checksum_compare()
