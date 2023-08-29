@@ -83,8 +83,9 @@ def transfer():
     for line in lines:
         count += 1
         print("Line {}: {}".format(count, line))
+        #ser.write('\010'.encode())    # ascii carriage return
         ser.write(line.encode())
-        time.sleep(0.1)
+        time.sleep(0.3)
 
 ############### RECEIVE ###############
 
