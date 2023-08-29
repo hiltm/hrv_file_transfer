@@ -34,6 +34,14 @@ def get_file_to_transfer():
     return file_to_transfer
 
 ############### DATA VERIFICATION ###############
+def hashFor(data):
+    # Prepare the project id hash
+    hashId = hashlib.md5()
+
+    hashId.update(repr(data).encode('utf-8'))
+
+    return hashId.hexdigest()
+
 def get_checksum(bytes, hash_function):
     """Generate checksum for file baed on hash function (MD5 or SHA256).
  
@@ -48,12 +56,13 @@ def get_checksum(bytes, hash_function):
         Exception: Invalid hash function is entered.
  
     """
+    bytes = hashFor(bytes)
     
     hash_function = hash_function.lower()
     if hash_function == "md5":
-        readable_hash = hashlib.md5(bytes.to_bytes(2, 'big')).hexdigest()
+        readable_hash = hashlib.md5(bytes.encode('utf-8')).hexdigest()
     elif hash_function == "sha256":
-        readable_hash = hashlib.sha256(bytes.to_bytes(2, 'big')).hexdigest()
+        readable_hash = hashlib.sha256(bytes.encode('utf-8')).hexdigest()
     else:
         raise("{} is an invalid hash function. Please Enter MD5 or SHA256")
  
@@ -117,7 +126,7 @@ def transfer():
         print("Line {}: {}".format(count, line))
         #ser.write('\010'.encode())    # ascii carriage return
         ser.write(line.encode())
-        time.sleep(0.3)
+        time.sleep(0.1)
 
 ############### RECEIVE ###############
 
