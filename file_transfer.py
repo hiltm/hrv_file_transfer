@@ -6,6 +6,7 @@ import hashlib
 
 #### TODO ####
 # load multiple files and concatenate to write all to msoperat.cfg
+# fix transfer removing line feeds and adding more carriage returns
 
 data_in = []
 data_out = []
