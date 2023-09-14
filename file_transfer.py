@@ -4,10 +4,6 @@ import serial
 import serial.tools.list_ports
 import hashlib
 
-#### TODO ####
-# load multiple files and concatenate to write all to msoperat.cfg
-# fix transfer removing line feeds and adding more carriage returns
-
 data_in = []
 data_out = []
 file_to_transfer = ''
@@ -132,7 +128,8 @@ def transmit(cmd_to_transmit):
 
 def receive():
     #while ser.in_waiting:
-    end_of_file = ("#END\r")                #end of file as dictated by PIC code, this is added by default to files generated through SID-Automation-GUI
+    #end of file as dictated by PIC code, this is added by default to files generated through SID-Automation-GUI
+    end_of_file = ("#END\r")
     data = ser.read_until(end_of_file)
     set_data_in(data)
     
