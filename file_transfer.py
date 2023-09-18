@@ -164,7 +164,7 @@ time.sleep(wait_time)
 transmit('FILE\r\n')
 time.sleep(wait_time)
 #receive_all()
-transmit('COPY MSOPERAT.cfg FILEBACK.cfg\r\n') #back up existing msoperat.cfg on sd card, can't be longer than 12 characters currently
+transmit('BACKUP\r\n') #back up existing msoperat.cfg on sd card
 time.sleep(wait_time)
 #receive_all()
 transmit('DEL msoperat.cfg\r\n') #delete existing msoperat.cfg on sd card
