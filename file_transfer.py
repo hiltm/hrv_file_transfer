@@ -4,6 +4,9 @@ import serial
 import serial.tools.list_ports
 import hashlib
 
+###TODOS####### TODO
+#get checksum working
+
 data_in = []
 data_out = []
 file_to_transfer = ''
@@ -184,3 +187,6 @@ transmit('TYPE msoperat.cfg\r\n')    # read data written to file on SD card
 #time.sleep(wait_time)
 receive()
 checksum_compare()
+transmit('QUIT\r\n') # exit file operations menu
+time.sleep(wait_time)
+#receive_all()
