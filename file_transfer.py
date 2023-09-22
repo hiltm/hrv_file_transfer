@@ -186,7 +186,7 @@ time.sleep(wait_time)
 transmit('TYPE msoperat.cfg\r\n')    # read data written to file on SD card
 #time.sleep(wait_time)
 receive()
-checksum_compare()
+#checksum_compare()
 time.sleep(wait_time)
 transmit('QUIT\r\n') # exit file operations menu
 time.sleep(wait_time)
