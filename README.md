@@ -22,3 +22,6 @@ The SCB must have an SD card installed and mounted.
 - load multiple files and concatenate to write all to msoperat.cfg
 - fix transfer removing line feeds and adding more carriage returns
 - correct checksum
+
+# Exported Repo Path
+https://git.whoi.edu/ms-sid/hrv_file_transfer
